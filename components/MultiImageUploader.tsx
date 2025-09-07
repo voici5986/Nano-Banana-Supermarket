@@ -42,7 +42,7 @@ const UploaderBox: React.FC<UploaderBoxProps> = ({ onImageSelect, imageUrl, onCl
                 {!imageUrl ? (
                     <label htmlFor={inputId} className="flex flex-col items-center justify-center text-gray-500 cursor-pointer w-full h-full text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.158 0h.008v.008h-.008V8.25z" /></svg>
-                        <p className="mb-1 text-xs font-semibold">Click or drag to upload</p>
+                        <p className="mb-1 text-xs font-semibold">点击或拖动以上传</p>
                         <p className="text-xs text-gray-600">{description}</p>
                         <input id={inputId} type="file" className="hidden" onChange={handleFileChange} accept="image/*" />
                     </label>
