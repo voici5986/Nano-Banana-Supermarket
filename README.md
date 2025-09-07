@@ -23,7 +23,7 @@ GEMINI_API_KEY = 官方API密钥
 **中转API（以GPT-Load为例）配置如下：**
 
 ```
-API_BASE_URL = https://xxx.com/proxy/gemini
+API_BASE_URL = https://xxx.com/proxy/gemini/v1beta
 GEMINI_API_KEY = 自定义API密钥
 ```
 
