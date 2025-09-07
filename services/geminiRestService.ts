@@ -4,8 +4,11 @@ if (!process.env.API_KEY) {
   throw new Error("API_KEY environment variable is not set.");
 }
 
-// const API_BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
-const API_BASE_URL = "https://gpt-load-latest-craf.onrender.com/proxy/gemini/v1beta";
+if (!process.env.API_BASE_URL) {
+  throw new Error("API_BASE_URL environment variable is not set.");
+}
+
+const API_BASE_URL = process.env.API_BASE_URL;
 const MODEL = "gemini-2.5-flash-image-preview";
 
 export async function editImage(
