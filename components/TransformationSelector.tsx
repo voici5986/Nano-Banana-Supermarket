@@ -56,7 +56,7 @@ const TransformationSelector: React.FC<TransformationSelectorProps> = ({ transfo
           : "准备好改变现实了吗？选择一个效果开始魔法。你可以拖拽重新排序你喜欢的效果。"
         }
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {transformations.map((trans, index) => (
           <button
             key={trans.title}
