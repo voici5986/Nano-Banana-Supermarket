@@ -35,7 +35,7 @@ const UploaderBox: React.FC<UploaderBoxProps> = ({ onImageSelect, imageUrl, onCl
             <h3 className="text-sm font-semibold text-gray-300">{title}</h3>
             <div
                 onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}
-                className={`relative w-full aspect-square bg-black rounded-lg flex items-center justify-center transition-colors duration-200 select-none ${
+                className={`relative w-full h-64 bg-black rounded-lg flex items-center justify-center transition-colors duration-200 select-none ${
                 isDragging ? 'outline-dashed outline-2 outline-orange-500 bg-orange-500/10' : ''
                 } ${imageUrl ? 'p-0' : 'p-4 border-2 border-dashed border-white/20'}`}
             >

@@ -133,7 +133,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ content, onUseImageAsInpu
     const rightImageSrc = imageMap[sliderRight];
     
     return (
-       <div className="w-full h-full flex flex-col items-center gap-4 animate-fade-in">
+       <div className="w-full h-[500px] flex flex-col items-center gap-4 animate-fade-in">
         <div className="w-full flex justify-center">
             <div className="p-1 bg-gray-900 rounded-lg flex items-center gap-1">
                 {(['result', 'grid', 'slider'] as TwoStepViewMode[]).map(mode => (
@@ -153,7 +153,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ content, onUseImageAsInpu
         </div>
         
         {twoStepViewMode === 'result' && (
-            <div className="w-full h-full flex flex-col items-center gap-4 flex-grow">
+            <div className="w-full flex-grow flex flex-col items-center gap-4">
                 <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-2 flex-grow">
                 {[
                     { src: content.secondaryImageUrl, label: 'Line Art' },
@@ -183,13 +183,13 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ content, onUseImageAsInpu
         )}
 
         {twoStepViewMode === 'grid' && (
-             <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-2 flex-grow">
+             <div className="w-full h-full flex-grow grid grid-cols-1 md:grid-cols-3 gap-2">
                 {[
                     {src: originalImageUrl, label: 'Original'},
                     {src: content.secondaryImageUrl, label: 'Line Art'},
                     {src: content.imageUrl, label: 'Final Result'},
                 ].map(({src, label}) => (
-                    <div key={label} className="relative rounded-lg overflow-hidden border border-white/10 bg-black flex items-center justify-center flex-col p-1 aspect-square md:aspect-auto">
+                    <div key={label} className="relative rounded-lg overflow-hidden border border-white/10 bg-black flex items-center justify-center p-1">
                         <img src={src} alt={label} className="max-w-full max-h-full object-contain"/>
                         <div className="absolute bottom-1 right-1 text-xs bg-black/50 text-white px-2 py-1 rounded">{label}</div>
                     </div>
@@ -271,10 +271,10 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ content, onUseImageAsInpu
   );
 
   return (
-    <div className="w-full h-full flex flex-col items-center gap-4 animate-fade-in">
+    <div className="w-full h-[500px] flex flex-col items-center gap-4 animate-fade-in">
       {content.imageUrl && originalImageUrl && <ViewSwitcher />}
       
-      <div className="w-full flex-grow relative">
+      <div className="w-full h-full flex-grow relative">
         {viewMode === 'result' && content.imageUrl && (
           <div 
             className="w-full h-full relative bg-black rounded-lg overflow-hidden shadow-inner cursor-pointer group border border-white/10 flex items-center justify-center"
@@ -328,7 +328,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ content, onUseImageAsInpu
                     className="flex-1 py-2 px-4 bg-gray-800 text-gray-200 font-semibold rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-2"
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM15 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1z" /></svg>
-                <span>Download Comparison</span>
+                <span>下载对比图</span>
               </button>
             )}
             <button
