@@ -41,6 +41,7 @@ const App: React.FC = () => {
   });
 
   const [selectedTransformation, setSelectedTransformation] = useState<Transformation | null>(null);
+  const [editedPrompt, setEditedPrompt] = useState<string>('');
   const [primaryImageUrl, setPrimaryImageUrl] = useState<string | null>(null);
   const [primaryFile, setPrimaryFile] = useState<File | null>(null);
   const [secondaryImageUrl, setSecondaryImageUrl] = useState<string | null>(null);
@@ -68,6 +69,7 @@ const App: React.FC = () => {
 
   const handleSelectTransformation = (transformation: Transformation) => {
     setSelectedTransformation(transformation);
+    setEditedPrompt(transformation.prompt === 'CUSTOM' ? '' : transformation.prompt);
     setGeneratedContent(null);
     setError(null);
     if (transformation.prompt !== 'CUSTOM') {
@@ -115,7 +117,7 @@ const App: React.FC = () => {
         return;
     }
     
-    const promptToUse = selectedTransformation.prompt === 'CUSTOM' ? customPrompt : selectedTransformation.prompt;
+    const promptToUse = selectedTransformation.prompt === 'CUSTOM' ? customPrompt : (editedPrompt.trim() || selectedTransformation.prompt);
     if (!promptToUse.trim()) {
         setError("Please enter a prompt describing the change you want to see.");
         return;
@@ -213,7 +215,7 @@ const App: React.FC = () => {
       setIsLoading(false);
       setLoadingMessage('');
     }
-  }, [primaryImageUrl, secondaryImageUrl, selectedTransformation, maskDataUrl, customPrompt, transformations]);
+  }, [primaryImageUrl, secondaryImageUrl, selectedTransformation, maskDataUrl, customPrompt, editedPrompt, transformations]);
 
 
   const handleUseImageAsInput = useCallback(async (imageUrl: string) => {
@@ -255,6 +257,7 @@ const App: React.FC = () => {
 
   const handleResetApp = () => {
     setSelectedTransformation(null);
+    setEditedPrompt('');
     setPrimaryImageUrl(null);
     setPrimaryFile(null);
     setSecondaryImageUrl(null);
@@ -332,17 +335,34 @@ const App: React.FC = () => {
                       <span className="text-3xl">{selectedTransformation.emoji}</span>
                       {selectedTransformation.title}
                     </h2>
-                    {selectedTransformation.prompt === 'CUSTOM' ? (
-                        <textarea
-                            value={customPrompt}
-                            onChange={(e) => setCustomPrompt(e.target.value)}
-                            placeholder="e.g., 'make the sky a vibrant sunset' or 'add a small red boat on the water'"
-                            rows={3}
-                            className="w-full mt-2 p-3 bg-gray-900 border border-white/20 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors placeholder-gray-500"
-                        />
-                    ) : (
-                       <p className="text-gray-400">{selectedTransformation.description}</p>
+                    {selectedTransformation.prompt !== 'CUSTOM' && (
+                      <p className="font-bold text-gray-400 text-sm mt-3">{selectedTransformation.description}</p>
                     )}
+                    <div className="mt-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        提示词
+                      </label>
+                      <textarea
+                        value={selectedTransformation.prompt === 'CUSTOM' ? customPrompt : editedPrompt}
+                        onChange={(e) => {
+                          if (selectedTransformation.prompt === 'CUSTOM') {
+                            setCustomPrompt(e.target.value);
+                          } else {
+                            setEditedPrompt(e.target.value);
+                          }
+                        }}
+                        placeholder={selectedTransformation.prompt === 'CUSTOM' 
+                          ? "e.g., 'make the sky a vibrant sunset' or 'add a small red boat on the water'" 
+                          : "编辑提示词以自定义效果..."}
+                        rows={3}
+                        className="w-full p-3 bg-gray-900 border border-white/20 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors placeholder-gray-500 text-gray-100"
+                      />
+                      {selectedTransformation.prompt !== 'CUSTOM' && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          原始提示词: {selectedTransformation.prompt}
+                        </p>
+                      )}
+                    </div>
                   </div>
                   
                   {selectedTransformation.isMultiImage ? (
