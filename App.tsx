@@ -215,7 +215,7 @@ const App: React.FC = () => {
       setIsLoading(false);
       setLoadingMessage('');
     }
-  }, [primaryImageUrl, secondaryImageUrl, selectedTransformation, maskDataUrl, customPrompt, editedPrompt, transformations]);
+  }, [primaryImageUrl, secondaryImageUrl, selectedTransformation, maskDataUrl, customPrompt, transformations]);
 
 
   const handleUseImageAsInput = useCallback(async (imageUrl: string) => {
@@ -335,9 +335,6 @@ const App: React.FC = () => {
                       <span className="text-3xl">{selectedTransformation.emoji}</span>
                       {selectedTransformation.title}
                     </h2>
-                    {selectedTransformation.prompt !== 'CUSTOM' && (
-                      <p className="font-bold text-gray-400 text-sm mt-3">{selectedTransformation.description}</p>
-                    )}
                     <div className="mt-2">
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         提示词
@@ -363,6 +360,9 @@ const App: React.FC = () => {
                         </p>
                       )}
                     </div>
+                    {selectedTransformation.prompt !== 'CUSTOM' && (
+                      <p className="text-gray-400 text-sm mt-3">{selectedTransformation.description}</p>
+                    )}
                   </div>
                   
                   {selectedTransformation.isMultiImage ? (
