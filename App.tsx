@@ -338,9 +338,23 @@ const App: React.FC = () => {
                     {selectedTransformation.prompt !== 'CUSTOM' && (
                       <p className="text-gray-400 text-sm mt-3 mb-3">{selectedTransformation.description}</p>
                     )}
-                    <div className="mt-2">
+                    <div className="mt-1">
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         提示词
+                        {selectedTransformation.prompt !== 'CUSTOM' && (
+                          <div 
+                            className="ml-2 inline-block relative group"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500 hover:text-gray-400 cursor-help" viewBox="0 0 20 20" fill="currentColor" onDoubleClick={() => navigator.clipboard.writeText(selectedTransformation.prompt)}>
+                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                            </svg>
+                            <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 px-4 py-3 bg-gray-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 min-w-[300px] max-w-md whitespace-normal break-words z-50 pointer-events-none shadow-lg">
+                              <div className="font-medium mb-1 text-orange-400">原始提示词 (双击图标复制):</div>
+                              <div className="leading-relaxed text-left">{selectedTransformation.prompt}</div>
+                              <div className="absolute right-full top-1/2 transform -translate-y-1/2 -mr-1 w-0 h-0 border-t-4 border-b-4 border-l-4 border-transparent border-l-gray-800"></div>
+                            </div>
+                          </div>
+                        )}
                       </label>
                       <textarea
                         value={selectedTransformation.prompt === 'CUSTOM' ? customPrompt : editedPrompt}
@@ -357,12 +371,7 @@ const App: React.FC = () => {
                         rows={3}
                         className="w-full p-3 bg-gray-900 border border-white/20 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors placeholder-gray-500 text-gray-100"
                       />
-                      {selectedTransformation.prompt !== 'CUSTOM' && (
-                        <p className="text-xs text-gray-500 mt-1">
-                          原始提示词: {selectedTransformation.prompt}
-                        </p>
-                      )}
-                    </div>
+                                          </div>
                   </div>
                   
                   {selectedTransformation.isMultiImage ? (

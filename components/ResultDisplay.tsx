@@ -84,7 +84,6 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ content, onUseImageAsInpu
     } else if (content.imageUrl) { // For single-step
         imagesToLoad.push({ url: content.imageUrl, img: new Image() });
     }
-
     const validImages = imagesToLoad.filter(item => item.url);
     if (validImages.length < 2) return;
 
